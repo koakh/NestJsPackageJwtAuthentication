@@ -1,14 +1,40 @@
 # NOTES
 
-## Links
+- [NOTES](#notes)
+  - [Starter Project](#starter-project)
+    - [Links](#links)
+    - [TLDR](#tldr)
+    - [Start NestJs NPM Package](#start-nestjs-npm-package)
+    - [Init Git/Remote Repository](#init-gitremote-repository)
+    - [Create remote repository NestJsPackageJwtAuthentication](#create-remote-repository-nestjspackagejwtauthentication)
+    - [Setting up for development](#setting-up-for-development)
+    - [Create the test app / consumer app](#create-the-test-app--consumer-app)
+    - [Edit root .gitignore](#edit-root-gitignore)
+    - [Update all consumer dependencies to latest and greatest](#update-all-consumer-dependencies-to-latest-and-greatest)
+    - [Update starter dependencies to nest 7.0](#update-starter-dependencies-to-nest-70)
+    - [Build the package](#build-the-package)
+    - [Install the package into the test app](#install-the-package-into-the-test-app)
+    - [Use the package in the test app](#use-the-package-in-the-test-app)
+    - [Configure/Fix debugger](#configurefix-debugger)
+    - [Do some changes in package](#do-some-changes-in-package)
+    - [Commit project and get comment id 6b178be](#commit-project-and-get-comment-id-6b178be)
+    - [Now clone project and create a Starter from it](#now-clone-project-and-create-a-starter-from-it)
+  - [Add Authentication](#add-authentication)
+    - [How to add NestJs modules to our custom Package](#how-to-add-nestjs-modules-to-our-custom-package)
+    - [Return to consumer App](#return-to-consumer-app)
+    - [Run consumer app](#run-consumer-app)
+
+## Starter Project
+
+### Links
 
 - [Publishing NestJS Packages with npm](https://dev.to/nestjs/publishing-nestjs-packages-with-npm-21fm)
 
-## TLDR
+### TLDR
 
 used node version `node/v12.8.1`
 
-## Start NestJs NPM Package
+### Start NestJs NPM Package
 
 ```shell
 $ git clone https://github.com/nestjsplus/nestjs-package-starter.git
@@ -33,7 +59,7 @@ $ code nestjs-package-jwt-authentication/package.json
   "bugs": "https://github.com/koakh/NestJsPackageJwtAuthentication",
 ```
 
-## Init Git/Remote Repository
+### Init Git/Remote Repository
 
 ```shell
 $ touch README.md
@@ -42,7 +68,7 @@ $ git add .
 $ git commit -am "first commit"
 ```
 
-## Create remote repository NestJsPackageJwtAuthentication
+### Create remote repository NestJsPackageJwtAuthentication
 
 ```shell
 git branch -M main
@@ -50,14 +76,14 @@ git remote add origin https://github.com/koakh/NestJsPackageJwtAuthentication.gi
 git push -u origin main
 ```
 
-## Setting up for development
+### Setting up for development
 
 ```shell
 $ cd nestjs-package-jwt-authentication/
 $ npm i
 ```
 
-## Create the test app / consumer app
+### Create the test app / consumer app
 
 In your second terminal window, make sure you start out in the top level folder you created. Scaffold the small NestJS app we'll be using to exercise our package.
 
@@ -76,7 +102,7 @@ Your folder structure should look similar to this now:
 └── README.md
 ```
 
-## Edit root .gitignore
+### Edit root .gitignore
 
 ```shell
 nestjs-package-jwt-authentication/node_modules/**
@@ -90,7 +116,7 @@ $ git add .
 $ git commit -am "commit before update starter npm dependencies"
 ```
 
-## Update all consumer dependencies to latest and greatest
+### Update all consumer dependencies to latest and greatest
 
 ```shell
 $ code nestjs-package-jwt-authentication-consumer/package.json
@@ -139,7 +165,7 @@ $ rm package-lock.json
 $ npm i
 ```
 
-## Update starter dependencies to nest 7.0
+### Update starter dependencies to nest 7.0
 
 ```shell
 # open side by side
@@ -195,7 +221,7 @@ $ rm package-lock.json
 $ npm i
 ```
 
-## Build the package
+### Build the package
 
 Take a moment to poke around in the `nestjs-package-starter/nestjs-package-jwt-authentication` folder
 
@@ -207,7 +233,7 @@ $ git add . && git commit -am "finished dependencies update"
 $ git push
 ```
 
-## Install the package into the test app
+### Install the package into the test app
 
 ```shell
 $ cd nestjs-package-jwt-authentication-consumer/
@@ -216,7 +242,7 @@ $ npm install ..
 $ npm install ../nestjs-package-jwt-authentication
 ```
 
-## Use the package in the test app
+### Use the package in the test app
 
 The template package exports a single simple test function. Examine `code ../nestjs-package-jwt-authentication/src/test.ts` to see it:
 
@@ -251,7 +277,7 @@ $ curl localhost:3000
 Hello from the new package!
 ```
 
-## Configure/Fix debugger
+### Configure/Fix debugger
 
 we must fix `nestjs-package-jwt-authentication-consumer` `npm run start:debug`, else it won't start as expected, change
 
@@ -277,7 +303,7 @@ add `../nestjs-package-jwt-authentication/dist` to `watch`, this way we have hot
 }
 ```
 
-## Do some changes in package
+### Do some changes in package
 
 ```shell
 # in window 1 : nestjs-package-jwt-authentication-consumer
@@ -306,10 +332,297 @@ Buon Giorno!
 
 now we have our development environment ready to roll
 
-## Commit project and get comment id 6b178be
+### Commit project and get comment id 6b178be
 
 ```shell
 $ git add .
 $ git commit -am "now we have our development environment ready to roll"
 [main 6b178be] now we have our development environment ready to roll
 ```
+
+### Now clone project and create a Starter from it
+
+```shell
+$ cp TypescriptNestJsPackageJwtAuthentication TypescriptNestJsPackageStarter -R
+$ rm .git -R
+$ mv nestjs-package-jwt-authentication nestjs-package-starter
+$ mv nestjs-package-jwt-authentication-consumer/ nestjs-package-starter-consumer
+```
+
+search and replace all :
+
+- `nestjs-package-jwt-authentication` with `nestjs-package-starter`
+- `NestJsPackageJwtAuthentication` with `NestjsPackageStarter`
+
+change both `package.json` description ex `"description": "Koakh NestJS Jwt Authentication Package",`
+
+```json
+{
+  "name": "@koakh/nestjs-package-starter",
+  "version": "1.0.0",
+  "description": "Koakh NestJS Starter Package",
+  "author": "Mário Monteiro <marioammonteiro@gmail.com>",
+```
+
+```json
+{
+  "name": "@koakh/nestjs-package-starter-consumer",
+  "version": "1.0.0",
+  "description": "Koakh NestJS Starter Package Consumer App",
+  "author": "Mário Monteiro <marioammonteiro@gmail.com>",
+```
+
+starter final commit 
+
+commit id [8b0737b](https://github.com/koakh/NestJsPackageStarter/commit/8b0737b24454bad1641c0182190824f1b2cc54aa)
+
+## Add Authentication
+
+### How to add NestJs modules to our custom Package
+
+like `@nestjs/jwt`
+start reading notes from project [NestJsPackageEasyConfig](https://github.com/koakh/NestJsPackageEasyConfig)
+
+```shell
+$ cd nestjs-package-jwt-authentication
+$ npm i @nestjs/jwt
+# generate module and service
+$ nest g module auth
+$ nest g service auth
+```
+
+start to change `AuthModule`
+
+```shell
+$ code src/auth/auth.module.ts
+```
+
+```typescript
+import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { AuthService } from './auth.service';
+
+@Module({
+  // Y Prospect TIP :), without that it never works, respect Y Prospect
+  imports: [
+    JwtModule.register({
+      secret: 'just a stupid password',
+      signOptions: { expiresIn: '60s' },
+    }),
+  ],
+  providers: [AuthService],
+  exports: [AuthService]
+})
+
+export class AuthModule {}
+```
+
+`src/auth/types/sign-user.ts`
+
+```typescript
+export interface SignUser {
+  username: string;
+  userId: string | number;
+}
+```
+
+```shell
+code src/auth/auth.service.ts
+```
+
+```typescript
+import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { SignUser } from './types';
+
+@Injectable()
+export class AuthService {
+  constructor(
+    private readonly jwtService: JwtService,
+  ) { }
+
+  getToken(signUser: SignUser) {
+    return this.jwtService.sign({ username: signUser.username, sub: signUser.userId });
+  }
+}
+```
+
+now remove `nestjs-package-jwt-authentication/src/test.ts` and add exports to barrel file `nestjs-package-jwt-authentication/src/index.ts`
+
+```typescript
+// export public api from here
+export * from './auth/auth.module';
+export * from './auth/auth.service';
+export * from './auth/types';
+```
+
+```shell
+# don't forget to build package else we can't import it in consumer app
+$ npm run build
+# or 
+$ npm run start:dev
+```
+
+done with package
+
+### Return to consumer App
+
+`nestjs-package-jwt-authentication-consumer/src/app.module.ts` and import AuthModule
+
+```typescript
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { AuthModule } from '@koakh/nestjs-package-jwt-authentication';
+
+@Module({
+  imports: [
+    // the trick is import the module, not the service here
+    AuthModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
+})
+
+export class AppModule { }
+```
+
+`nestjs-package-jwt-authentication-consumer/src/app.service.ts`
+
+```typescript
+import { Injectable } from '@nestjs/common';
+import { AuthService, SignUser } from '@koakh/nestjs-package-jwt-authentication';
+
+@Injectable()
+export class AppService {
+  constructor(
+    private readonly authService: AuthService,
+  ) { }
+
+  getToken(signUser: SignUser): string {
+    return this.authService.getToken(signUser);
+  }
+}
+```
+
+`nestjs-package-jwt-authentication-consumer/src/app.controller.ts`
+
+```typescript
+import { Controller, Get } from '@nestjs/common';
+import { AuthService } from '@koakh/nestjs-package-jwt-authentication';
+
+@Controller()
+export class AppController {
+
+  constructor(
+    private readonly authService: AuthService,
+  ) { }
+
+  @Get()
+  getToken(): string {
+    return this.authService.getToken({ username: 'koakh', userId: 28 });
+  }
+};
+```
+
+### Run consumer app
+
+```shell
+$ npm run start:debug
+# test jwt
+$ curl localhost:3000
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtvYWtoIiwic3ViIjoyOCwiaWF0IjoxNjAxNjU1NjQ5LCJleHAiOjE2MDE2NTU3MDl9.8RiWhyrMlZaUdsDG-Web5kNLldelkKffk7o221KQWF8
+```
+
+done, we have a nestjs package working inside our own package without issues, great we can use nestjs packages, node modeules :)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```shell
+$ npm run start
+TSError: ⨯ Unable to compile TypeScript:
+src/app.module.ts:4:28 - error TS2307: Cannot find module '@koakh/nestjs-package-jwt-authentication' or its corresponding type declarations.
+
+4 import { AuthModule } from '@koakh/nestjs-package-jwt-authentication';
+```
+
+fuck the problem is this `"main": "dist/test.js"`, change to "main": `"dist/index.js"`
+
+```json
+{
+  "name": "@koakh/nestjs-package-jwt-authentication",
+  "version": "1.0.0",
+  "description": "Koakh NestJS Jwt Authentication Package",
+  "author": "Mário Monteiro <marioammonteiro@gmail.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "main": "dist/test.js",
+```
+
+and re-install `npm i ../nestjs-package-jwt-authentication`
+
+
+
+
+
+
+
+Error: Cannot find module 'reflect-metadata'
+required in `nestjs-package-jwt-authentication`
+Require stack:
+- /media/mario/Storage/Documents/Development/Node/@NestJsPackages/TypescriptNestJsPackageJwtAuthentication/nestjs-package-jwt-authentication/node_modules/@nestjs/common/index.js
+
+- [Cannot find module 'reflect-metadata](https://github.com/nestjs/nest/issues/1211)
+
+It's a peerDependency.
+You need to install it alongside rxjs aswell.
+
+```shell
+$ cd nestjs-package-jwt-authentication
+$ npm install --save reflect-metadata rxjs
+```
+
+done
+
+
+
+
+
+now use JsonWebTokenService in src/app.service.ts
+
+import { Injectable } from '@nestjs/common';
+import { EasyconfigService, JsonWebTokenService } from 'nestjs-easyconfig';
+
+@Injectable()
+export class AppService {
+  constructor(
+    private readonly easyconfigService: EasyconfigService,
+    private readonly jsonWebTokenService: JsonWebTokenService,
+    ) { }
+
+  getHello(): string {
+    const envVar = this.easyconfigService.get('ENV_VAR1');
+    const token = this.jsonWebTokenService.getToken({ username: 'koakh', sub: 28 });
+    return `Hello World! ${envVar} ${token}`;
+  }
+}
+run it, and browse http://localhost:3000curl localhost:3000
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtvYWtoIiwic3ViIjoyOCwiaWF0IjoxNjAxNjU1NjQ5LCJleHAiOjE2MDE2NTU3MDl9.8RiWhyrMlZaUdsDG-Web5kNLldelkKffk7o221KQWF8
+
+Hello World! FOO eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtvYWtoIiwiaWF0IjoxNTY4MzMxMzMzLCJleHAiOjE1NjgzMzEzOTN9.dHd-iEm3JfmJJCprN0hZMk0TQRjCH0iuQAMJx9kn5gQ
+awesome

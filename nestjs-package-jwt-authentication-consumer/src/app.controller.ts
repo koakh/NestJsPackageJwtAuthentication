@@ -1,10 +1,15 @@
 import { Controller, Get } from '@nestjs/common';
-import { getHello } from '@koakh/nestjs-package-jwt-authentication';
+import { AuthService } from '@koakh/nestjs-package-jwt-authentication';
 
 @Controller()
 export class AppController {
+
+  constructor(
+    private readonly authService: AuthService,
+  ) { }
+
   @Get()
-  getHello(): string {
-    return getHello();
+  getToken(): string {
+    return this.authService.getToken({ username: 'koakh', userId: 28 });
   }
-}
+};

@@ -1,8 +1,8 @@
 {
   "name": "@koakh/nestjs-package-jwt-authentication-consumer",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "1.0.0",
+  "description": "Koakh NestJS Jwt Authentication Package Consumer App",
+  "author": "Mário Monteiro <marioammonteiro@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
