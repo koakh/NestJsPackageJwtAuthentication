@@ -305,3 +305,11 @@ Buon Giorno!
 ```
 
 now we have our development environment ready to roll
+
+## Commit project and get comment id 6b178be
+
+```shell
+$ git add .
+$ git commit -am "now we have our development environment ready to roll"
+[main 6b178be] now we have our development environment ready to roll
+```
