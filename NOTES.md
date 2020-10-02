@@ -79,6 +79,11 @@ nestjs-package-jwt-authentication/node_modules/**
 nestjs-package-jwt-authentication-consumer/node_modules/**
 ```
 
+```shell
+$ git add .
+$ git commit -am "commit before update starter npm dependencies"
+```
+
 ## Update starter dependencies to nest 7.0
 
 
