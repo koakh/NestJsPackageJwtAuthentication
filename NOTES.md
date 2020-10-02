@@ -77,6 +77,8 @@ Your folder structure should look similar to this now:
 ```shell
 nestjs-package-jwt-authentication/node_modules/**
 nestjs-package-jwt-authentication-consumer/node_modules/**
+.trash
+.bak
 ```
 
 ```shell
