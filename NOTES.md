@@ -98,6 +98,7 @@ $ code nestjs-package-jwt-authentication-consumer/package.json
 
 ```json
 {
+  "name": "@koakh/nestjs-package-jwt-authentication-consumer",
   "version": "1.0.0",
   "description": "Koakh NestJS Jwt Authentication Package",
   "author": "Mário Monteiro <marioammonteiro@gmail.com>",
@@ -201,4 +202,106 @@ Take a moment to poke around in the `nestjs-package-starter/nestjs-package-jwt-a
 ```shell
 $ cd nestjs-package-jwt-authentication
 $ npm run build
+# commit changes
+$ git add . && git commit -am "finished dependencies update"
+$ git push
 ```
+
+## Install the package into the test app
+
+```shell
+$ cd nestjs-package-jwt-authentication-consumer/
+# use npm to install the package we just built into our test app.
+$ npm install ..
+$ npm install ../nestjs-package-jwt-authentication
+```
+
+## Use the package in the test app
+
+The template package exports a single simple test function. Examine `code ../nestjs-package-jwt-authentication/src/test.ts` to see it:
+
+```typescript
+export function getHello(): string {
+  return 'Hello from the new package!';
+}
+```
+
+Now that you've installed the new package in `nestjs-package-jwt-authentication-consumer`, it's available like any npm package, and you can use it in the normal fashion. Open `nestjs-package-jwt-authentication-consumer/src/app.controller.ts` and import the function; make sure the file looks like this:
+
+```shell
+import { Controller, Get } from '@nestjs/common';
+import { getHello } from '@koakh/nestjs-package-jwt-authentication';
+
+@Controller()
+export class AppController {
+  @Get()
+  getHello(): string {
+    return getHello();
+  }
+}
+```
+
+In terminal window 2, start `nestjs-package-jwt-authentication` (using start:dev is recommended here so we can make iterative changes):
+
+```shell
+$ cd nestjs-package-jwt-authentication-consumer
+$ npm run start:dev
+# done we have access to package
+$ curl localhost:3000
+Hello from the new package!
+```
+
+## Configure/Fix debugger
+
+we must fix `nestjs-package-jwt-authentication-consumer` `npm run start:debug`, else it won't start as expected, change
+
+`nestjs-package-jwt-authentication-consumer/nodemon-debug.json`
+
+remove `-brk` from `--inspect-brk`
+
+```json
+{
+  "exec": "node --inspect -r ts-node/register -r tsconfig-paths/register src/main.ts"
+}
+```
+
+add `../nestjs-package-jwt-authentication/dist` to `watch`, this way we have hot reload working with `start:dev` and `start:debug` in consumer app
+
+`nestjs-package-jwt-authentication-consumer/nodemon.json`
+`nestjs-package-jwt-authentication-consumer/nodemon-debug.json`
+
+```json
+{
+  "watch": ["src", "../nestjs-package-jwt-authentication/dist"],
+  ...
+}
+```
+
+## Do some changes in package
+
+```shell
+# in window 1 : nestjs-package-jwt-authentication-consumer
+$ npm run start:debug
+# in window 2 : nestjs-package-jwt-authentication
+$ npm run start:dev
+```
+
+Make a simple change to the `nestjs-package-jwt-authentication/src/test.ts` `getHello()` function exported by the package, change it to return 'Buon Giorno!'
+
+> Note: use `npm run start:debug` and add a `breakpoint/debugger;`
+
+```typescript
+export function getHello(): string {
+  debugger;
+  return 'Buon Giorno!';
+}
+```
+
+Notice that in terminal window 2, since we're linked to the local package, the dev server will automatically restart as the package is rebuilt :)
+
+```shell
+$ curl localhost:3000
+Buon Giorno!
+```
+
+now we have our development environment ready to roll
