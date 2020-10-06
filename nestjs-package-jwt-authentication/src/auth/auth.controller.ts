@@ -7,6 +7,8 @@ import { envConstants } from '../common/constants/env';
 import { LoginUserDto } from '../user/dtos';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
+import { JwtAuthGuard } from './guards';
+import { LocalAuthGuard } from './guards/local-auth.guard';
 import AccessToken from './interfaces/access-token';
 import { JwtResponsePayload } from './interfaces/jwt-response.payload';
 
@@ -18,19 +20,20 @@ export class AuthController {
     private readonly jwtService: JwtService,
     private readonly userService: UserService,
   ) { }
-  // @UseGuards(AuthGuard('local'))
+  // curl -X POST http://localhost:3000/auth/login -d '{"username": "john", "password": "changeme"}' -H "Content-Type: application/json"
+  @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req) {
-    // debugger;
-    // return req.user;
-    return 'post login';
+    debugger;
+    return req.user;
+    // return this.authService.login(req.user);
   }
 
-  @Get()
-  async fake(@Request() req) {
-    return 'get fake';
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
   }
-
 
   @Post('/refresh-token')
   async refreshToken(

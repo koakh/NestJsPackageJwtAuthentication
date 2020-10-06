@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule, JwtService } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
 import { envConstants } from '../common/constants/env';
 import { UserModule } from '../user/user.module';
 import { UserService } from '../user/user.service';
@@ -13,6 +14,7 @@ import { JwtStrategy, LocalStrategy } from './strategy';
     // used in consumer app with `ConfigModule.forRoot({ isGlobal: true, }),`
     // ConfigModule.forRoot(),
     // ConfigModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
