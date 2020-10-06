@@ -8,7 +8,7 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     // config module
     ConfigModule.forRoot({ isGlobal: true, }),
-    // the trick is import the module, not the service here
+    // the trick is import the module, not the service here, this will expose AppController to
     AuthModule,
   ],
   controllers: [AppController],
