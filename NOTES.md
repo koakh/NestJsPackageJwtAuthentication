@@ -14,6 +14,7 @@
     - [Change JwtModule.register to JwtModule.registerAsync](#change-jwtmoduleregister-to-jwtmoduleregisterasync)
     - [Install @nestjs/config on both projects](#install-nestjsconfig-on-both-projects)
     - [Final tested Curl](#final-tested-curl)
+  - [Add Auth files from other Auth Projects](#add-auth-files-from-other-auth-projects)
 
 ## Starter Project
 
@@ -288,7 +289,7 @@ now install `@nestjs/config` on package `nestjs-package-jwt-authentication` only
 ```shell
 # install dependencies
 $ cd nestjs-package-jwt-authentication
-$ npm i --save @nestjs/config
+$ npm i @nestjs/config
 #  build package
 npm run start:dev
 ```
@@ -320,3 +321,13 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtvYWtoIiwic3ViIjoyOCwiaWF
 ```
 
 done now it works with environment variables
+
+## Add Auth files from other Auth Projects
+
+```shell
+# install dependencies
+$ cd nestjs-package-jwt-authentication
+$ npm i @nestjs/passport passport-local passport-jwt bcrypt
+#  build package
+$ npm run start:dev
+```

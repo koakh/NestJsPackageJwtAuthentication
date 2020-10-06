@@ -12,6 +12,6 @@
     "baseUrl": "./",
     "noLib": false
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/auth/auth.controller.ts"],
   "exclude": ["node_modules"]
 }
