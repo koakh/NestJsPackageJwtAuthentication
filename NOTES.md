@@ -269,6 +269,7 @@ import { AuthService } from './auth.service';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get('ACCESS_TOKEN_JWT_SECRET'),
+        signOptions: { expiresIn: configService.get('ACCESS_TOKEN_EXPIRES_IN') },
       }),
       inject: [ConfigService],
     }),
