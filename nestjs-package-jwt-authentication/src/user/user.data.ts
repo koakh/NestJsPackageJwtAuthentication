@@ -9,7 +9,7 @@ export const userData: UserData[] = [{
   email: 'pheine0@illinois.edu',
   roles: ['USER', 'ADMIN'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '520c2eb5-e83b-4ef5-a343-85756bcce149',
   username: 'johndoe',
@@ -19,7 +19,7 @@ export const userData: UserData[] = [{
   email: 'ktrett1@livejournal.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'fa525f32-b6b7-40b5-8d09-b638d00ded3b',
   username: 'sstert2',
@@ -29,7 +29,7 @@ export const userData: UserData[] = [{
   email: 'sstert2@ask.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '136c8e64-b5b2-4606-b845-f9dc26f3fb28',
   username: 'gnatte3',
@@ -39,7 +39,7 @@ export const userData: UserData[] = [{
   email: 'gnatte3@i2i.jp',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '0da9413f-ba84-4b9c-9729-37daa78de2d9',
   username: 'zespinheira4',
@@ -49,7 +49,7 @@ export const userData: UserData[] = [{
   email: 'zespinheira4@bandcamp.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'dffbd368-8ea1-484c-96e7-2aaf2595a14d',
   username: 'ejessope5',
@@ -59,7 +59,7 @@ export const userData: UserData[] = [{
   email: 'ejessope5@plala.or.jp',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'b68d77c6-2e0c-4d8b-991a-ab3154616625',
   username: 'wmewrcik6',
@@ -69,7 +69,7 @@ export const userData: UserData[] = [{
   email: 'wmewrcik6@elegantthemes.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'e25f2e23-fb96-4e36-8d7a-527a04a6f21a',
   username: 'bpersey7',
@@ -79,7 +79,7 @@ export const userData: UserData[] = [{
   email: 'bpersey7@paypal.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '15566d70-2cc6-4d01-a005-1783e3333153',
   username: 'kbertholin8',
@@ -89,7 +89,7 @@ export const userData: UserData[] = [{
   email: 'kbertholin8@cbc.ca',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'd9c0ec8c-3f30-45dc-9c9e-0535855eebb7',
   username: 'aslater9',
@@ -99,7 +99,7 @@ export const userData: UserData[] = [{
   email: 'aslater9@altervista.org',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '2ad49b88-822b-4764-ae58-54fd4f487faf',
   username: 'olarkinsa',
@@ -109,7 +109,7 @@ export const userData: UserData[] = [{
   email: 'olarkinsa@prlog.org',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'b4b9df50-a68d-4754-8006-fdac47bd6ff4',
   username: 'ldixieb',
@@ -119,7 +119,7 @@ export const userData: UserData[] = [{
   email: 'ldixieb@eventbrite.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'f6970851-795c-4f8c-85b1-3734faebc13b',
   username: 'aludvigsenc',
@@ -129,7 +129,7 @@ export const userData: UserData[] = [{
   email: 'aludvigsenc@cyberchimps.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'c6d10ac0-5529-41c1-865e-e01713cee884',
   username: 'probardd',
@@ -139,7 +139,7 @@ export const userData: UserData[] = [{
   email: 'probardd@devhub.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '5ea39b45-0efc-4754-8bcc-6094f5ed412f',
   username: 'cspreadburye',
@@ -149,7 +149,7 @@ export const userData: UserData[] = [{
   email: 'cspreadburye@xinhuanet.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'f81c4c20-246a-4519-9b7c-6c685ceb66df',
   username: 'vheavensf',
@@ -159,7 +159,7 @@ export const userData: UserData[] = [{
   email: 'vheavensf@nbcnews.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '7f2ed332-a7ca-4c23-84e6-d341e761c73c',
   username: 'roquing',
@@ -169,7 +169,7 @@ export const userData: UserData[] = [{
   email: 'roquing@uiuc.edu',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '3d016ad5-a407-44ea-8eb4-f034fd1c3930',
   username: 'lculloteyh',
@@ -179,7 +179,7 @@ export const userData: UserData[] = [{
   email: 'lculloteyh@jimdo.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '3d190a69-a282-4d1f-a9eb-fc49ddfbf492',
   username: 'nslorai',
@@ -189,7 +189,7 @@ export const userData: UserData[] = [{
   email: 'nslorai@instagram.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '5c36f169-13d6-4805-bc70-f46ea430dc16',
   username: 'fblestj',
@@ -199,7 +199,7 @@ export const userData: UserData[] = [{
   email: 'fblestj@ask.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'b01e9b28-ce12-48d9-8bb2-c9c81a45ce2b',
   username: 'ascroxtonk',
@@ -209,7 +209,7 @@ export const userData: UserData[] = [{
   email: 'ascroxtonk@scientificamerican.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'ce76d275-d786-4c51-8598-3ff42f8f4c1c',
   username: 'ttuerl',
@@ -219,7 +219,7 @@ export const userData: UserData[] = [{
   email: 'ttuerl@tripod.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '6ae5d64d-346c-4e6b-a4e5-4d69c03e8337',
   username: 'openberthym',
@@ -229,7 +229,7 @@ export const userData: UserData[] = [{
   email: 'openberthym@sitemeter.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'a46cbc4a-25b3-4d70-a3f0-939301626a7c',
   username: 'mbrimleyn',
@@ -239,7 +239,7 @@ export const userData: UserData[] = [{
   email: 'mbrimleyn@exblog.jp',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'a8e63b4d-9ffc-4b35-b416-669eb669f0ae',
   username: 'agrimshawo',
@@ -249,7 +249,7 @@ export const userData: UserData[] = [{
   email: 'agrimshawo@cbc.ca',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: 'acc16671-5e9d-4cc7-8856-09771dec93fe',
   username: 'rjohnceyp',
@@ -259,7 +259,7 @@ export const userData: UserData[] = [{
   email: 'rjohnceyp@skyrock.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '71c2b5e8-d6f5-4b34-b85d-99055b8cac8d',
   username: 'drafteryq',
@@ -269,7 +269,7 @@ export const userData: UserData[] = [{
   email: 'drafteryq@google.ca',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }, {
   id: '9e6224af-2ded-4d77-9eb8-4713d4d5155c',
   username: 'bcockshotr',
@@ -279,5 +279,5 @@ export const userData: UserData[] = [{
   email: 'bcockshotr@163.com',
   roles: ['USER'],
   createdDate: 1597444307,
-  metaData: null
+  metaData: { key: 'value' }
 }];

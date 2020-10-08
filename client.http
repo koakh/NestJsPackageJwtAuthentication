@@ -1,0 +1,133 @@
+@host = localhost
+@port = 3000
+@uriBase = http://{{host}}:{{port}}
+@uri = {{uriBase}}
+@contentType = application/json
+
+@userLoginUsername = admin
+@userLoginPassword = 12345678
+@userIdAdmin = efeed3eb-c0a2-4b3e-816f-2a42ca8451b3
+@userJohnDoe = 520c2eb5-e83b-4ef5-a343-85756bcce149
+
+### authLogIn
+// @name authLogIn
+
+POST {{uri}}/auth/login HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "username": "admin", 
+  "password": "12345678"
+}
+
+### authRefreshToken
+// @name authRefreshToken
+
+POST {{uri}}/auth/refresh-token HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+}
+
+### authRevokeRefreshToken
+// @name authRevokeRefreshToken
+
+POST {{uri}}/auth/revoke-refresh-token HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "username":"admin"
+}
+
+
+### authLogOut
+// @name authLogOut
+@authToken = {{authLogIn.response.body.$.accessToken}}
+
+POST {{uri}}/auth/logout HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+}
+
+### userCreate
+// @name userCreate
+
+POST {{uri}}/user HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "userName": "mario.monteiro",
+  "age": 28,
+  "firstName": "Mário",
+  "lastName": "Monteiro",
+  "email":"mario.monteiro@critical-links.com"
+}
+
+### userFindAll  // @HttpCode(204)
+
+// @name userFindAll
+
+GET {{uri}}/user HTTP/1.1
+
+### findByIdUser
+// @name findByIdUser
+@userId = {{userFindAll.response.body.$.data[0]._id}}
+
+GET {{uri}}/user/{{userId}} HTTP/1.1
+
+### userUpdate
+// @name userUpdate
+@userId = {{userFindAll.response.body.$.data[0]._id}}
+
+PUT {{uri}}/user/{{userId}} HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "age": 82,
+  "email":"mario.monteiro@critical-links.com"
+}
+
+### userUpdateStatus
+// @name userUpdateStatus
+@userId = {{userFindAll.response.body.$.data[0]._id}}
+
+PATCH {{uri}}/user/{{userId}}/status HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "status": "ENABLED"
+}
+
+### userDelete
+// @name userDelete
+@userId = {{userFindAll.response.body.$.data[0]._id}}
+
+DELETE {{uri}}/user/{{userId}} HTTP/1.1
+
+# ### query: userById
+
+# // @name userById
+
+# POST {{uri}} HTTP/1.1
+# Content-Type: {{contentType}}
+# Authorization: Bearer {{authToken}}
+# X-REQUEST-TYPE: {{requestType}}
+
+# query userById($id: String!){
+#   userById(id:$id) {
+#     id
+#     username
+#     firstName
+#     lastName
+#     email
+#     roles
+#     createdDate
+#     metaData   
+#   }
+# }
+
+# {
+#   "id": "{{userIdAdmin}}"
+# }

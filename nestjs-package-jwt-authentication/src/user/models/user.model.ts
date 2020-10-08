@@ -1,4 +1,4 @@
-import { IsArray, IsDefined, IsEmail, IsNumber, IsObject, IsOptional, IsUUID, MaxLength, Validate } from 'class-validator';
+import { IsArray, IsDefined, IsEmail, IsNumber, IsObject, IsOptional, IsUUID, Length, MaxLength } from 'class-validator';
 
 export class User {
   @IsDefined()
@@ -6,13 +6,11 @@ export class User {
   id: string;
 
   @IsDefined()
-  @MaxLength(6)
-  @MaxLength(20)
+  @Length(4,20)
   username: string;
 
   @IsDefined()
-  @MaxLength(6)
-  @MaxLength(20)
+  @Length(4,20)
   password: string;
 
   @IsDefined()

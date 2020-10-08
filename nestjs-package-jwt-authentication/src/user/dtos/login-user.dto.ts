@@ -1,13 +1,11 @@
-import { IsDefined, MaxLength } from 'class-validator';
+import { IsDefined, Length } from 'class-validator';
 
 export class LoginUserDto {
   @IsDefined()
-  @MaxLength(6)
-  @MaxLength(20)
+  @Length(4,20)
   username: string;
 
   @IsDefined()
-  @MaxLength(6)
-  @MaxLength(20)
+  @Length(4,20)
   password: string;
 }

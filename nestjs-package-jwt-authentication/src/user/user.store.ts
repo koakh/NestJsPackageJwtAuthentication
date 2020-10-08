@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { envConstants } from '../common/constants';
 
@@ -36,7 +37,7 @@ export class UserStore {
 
   incrementTokenVersion(username: string): number {
     const user: User = this.getUser(username);
-    if (Boolean(this.configService.get(envConstants.REFRESH_TOKEN_SKIP_INCREMENT_VERSION))) {
+    if (Boolean(this.configService.get(envConstants.REFRESH_TOKEN_SKIP_INCREMENT_VERSION) === 'true' ? true : false)) {
       // devMode: don't increment tokenVersion
       return user.tokenVersion;
     } else {

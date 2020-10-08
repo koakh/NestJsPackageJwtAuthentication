@@ -15,6 +15,10 @@
     - [Install @nestjs/config on both projects](#install-nestjsconfig-on-both-projects)
     - [Final tested Curl](#final-tested-curl)
   - [Add Auth files from other Auth Projects](#add-auth-files-from-other-auth-projects)
+  - [Test TypescriptNestJsPackageJwtAuthentication with userService](#test-typescriptnestjspackagejwtauthentication-with-userservice)
+  - [Use Cookies](#use-cookies)
+  - [Good way to use refreshTokenJwtSecret](#good-way-to-use-refreshtokenjwtsecret)
+  - [Fuck solving the problem of wrong verify refreshTokje](#fuck-solving-the-problem-of-wrong-verify-refreshtokje)
 
 ## Starter Project
 
@@ -29,6 +33,8 @@
 used node version `node/v12.8.1`
 
 > this notes are the continuation of NOTES.md from [NestJsPackageStarter](https://github.com/koakh/NestJsPackageStarter/blob/main/NOTES.md)
+
+to debug use `launch.json` with [F5]
 
 ### Read base Starter Notes
 
@@ -330,4 +336,102 @@ $ cd nestjs-package-jwt-authentication
 $ npm i @nestjs/passport passport-local passport-jwt bcrypt
 #  build package
 $ npm run start:dev
+```
+
+after some hours working...........
+
+## Test TypescriptNestJsPackageJwtAuthentication with userService
+
+```shell
+$ curl -X POST http://localhost:3000/auth/login -d '{"username": "admin", "password": "12345678"}' -H "Content-Type: application/json"
+```
+
+
+
+
+
+
+
+miss dist consumer folder
+
+/usr/local/bin/node ./nestjs-package-jwt-authentication-consumer/src/main.ts
+Process exited with code 1
+Uncaught /media/mario/Storage/Documents/Development/Node/@NestJsPackages/TypescriptNestJsPackageJwtAuthentication/nestjs-package-jwt-authentication-consumer/src/main.ts:1
+import { ValidationPipe } from '@nestjs/common';
+       ^
+
+SyntaxError: Unexpected token {
+```json
+{
+  "valid": true,
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZXMiOlsiVVNFUiIsIkFETUlOIl0sImlhdCI6MTYwMjE1NjgxNywiZXhwIjoxNjAyMTU3NzE3fQ.64Nw3pZF701HzIAcRrIM_jqjyWOAyf2mI1nPkNX2mUQ"
+}
+```
+
+
+
+
+## Use Cookies
+
+- [Nest Middlewares - Cookie Parser](https://www.npmjs.com/package/@nest-middlewares/cookie-parser)
+
+```shell
+$ npm i @nest-middlewares/cookie-parser
+```
+
+```typescript
+import { CookieParserMiddleware } from '@nest-middlewares/cookie-parser';
+
+@Module({
+  ...
+})
+
+export class AuthModule { 
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(CookieParserMiddleware).forRoutes('/auth/refresh-token');
+  }
+}
+```
+
+> Warn: `/auth/refresh-token` must match endpoint, else we have a empty token
+
+
+## Good way to use refreshTokenJwtSecret
+
+> The possibility to provide the secret while calling the  jwtService.sign method has been added in the  7.1.0  version of  @nestjs/jwt
+
+- [13. API with NestJS #13. Implementing refresh tokens using JWT](https://wanago.io/2020/09/21/api-nestjs-refresh-tokens-jwt/)
+
+```typescript
+async signRefreshToken(user: any, tokenVersion: number, options?: SignOptions): Promise<AccessToken> {
+  const payload = { username: user.username, sub: user.userId, roles: user.roles, tokenVersion };
+  return {
+    // generate JWT from a subset of the user object properties
+    accessToken: this.jwtService.sign(payload, {
+      ...options,
+      // require to use refreshTokenJwtSecret
+      secret: this.configService.get(envConstants.REFRESH_TOKEN_JWT_SECRET),
+      expiresIn: this.configService.get(envConstants.ACCESS_TOKEN_EXPIRES_IN),
+    }),
+  };
+}
+```
+
+```json
+{
+  "valid": true,
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZXMiOlsiVVNFUiIsIkFETUlOIl0sImlhdCI6MTYwMjE1NjgxNywiZXhwIjoxNjAyMTU3NzE3fQ.64Nw3pZF701HzIAcRrIM_jqjyWOAyf2mI1nPkNX2mUQ"
+}
+```
+
+## Fuck solving the problem of wrong verify refreshTokje
+> Fuck now we must use `this.jwtService.verify(token, { secret: this.config.refreshTokenJwtSecret})` and not `this.jwtService.verify(token, this.config.refreshTokenJwtSecret)`, like we use in the past
+
+this occurs only when we use other secret, like we use in refreshTokens, in normal verifies we use only `this.jwtService.verify(token);`
+
+```typescript
+// OK
+payload = this.jwtService.verify(token.toString(), { secret: this.config.refreshTokenJwtSecret});
+// KO
+// payload = this.jwtService.verify(token, { secret: this.config.refreshTokenJwtSecret });
 ```

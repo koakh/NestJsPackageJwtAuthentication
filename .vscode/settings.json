@@ -3,6 +3,7 @@
     "Koakh",
     "Monteiro",
     "dtos",
+    "middlewares",
     "nestjs"
   ],
   "workbench.colorCustomizations": {

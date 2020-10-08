@@ -46,7 +46,12 @@ export class AuthService {
     const payload = { username: user.username, sub: user.userId, roles: user.roles, tokenVersion };
     return {
       // generate JWT from a subset of the user object properties
-      accessToken: this.jwtService.sign(payload, { ...options, expiresIn: this.configService.get(envConstants.ACCESS_TOKEN_EXPIRES_IN) }),
+      accessToken: this.jwtService.sign(payload, {
+        ...options,
+        // require to use refreshTokenJwtSecret
+        secret: this.configService.get(envConstants.REFRESH_TOKEN_JWT_SECRET),
+        expiresIn: this.configService.get(envConstants.ACCESS_TOKEN_EXPIRES_IN),
+      }),
     };
   }
 

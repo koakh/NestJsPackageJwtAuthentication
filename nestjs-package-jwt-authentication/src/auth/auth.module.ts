@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common';
+import { CookieParserMiddleware } from '@nest-middlewares/cookie-parser';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { JwtModule, JwtService } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
 import { envConstants } from '../common/constants/env';
 import { UserModule } from '../user/user.module';
 import { UserService } from '../user/user.service';
@@ -11,10 +11,6 @@ import { JwtStrategy, LocalStrategy } from './strategy';
 
 @Module({
   imports: [
-    // used in consumer app with `ConfigModule.forRoot({ isGlobal: true, }),`
-    // ConfigModule.forRoot(),
-    // ConfigModule,
-    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -30,4 +26,8 @@ import { JwtStrategy, LocalStrategy } from './strategy';
   controllers: [AuthController],
 })
 
-export class AuthModule { }
+export class AuthModule { 
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(CookieParserMiddleware).forRoutes('/auth/refresh-token');
+  }
+}

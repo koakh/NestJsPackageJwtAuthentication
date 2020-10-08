@@ -1,4 +1,4 @@
-import { IsDefined, IsEmail, IsOptional, IsUUID, MaxLength } from 'class-validator';
+import { IsDefined, IsEmail, IsOptional, IsUUID, Length, MaxLength } from 'class-validator';
 
 export class NewUserDto {
   @IsOptional()
@@ -6,13 +6,11 @@ export class NewUserDto {
   id?: string;
 
   @IsDefined()
-  @MaxLength(6)
-  @MaxLength(20)
+  @Length(4,20)
   username: string;
 
   @IsDefined()
-  @MaxLength(6)
-  @MaxLength(20)
+  @Length(4,20)
   password: string;
 
   @IsDefined()

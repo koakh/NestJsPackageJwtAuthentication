@@ -1,4 +1,4 @@
-import { IsDefined, IsUUID, MaxLength } from 'class-validator';
+import { IsDefined, IsUUID, Length, MaxLength } from 'class-validator';
 
 export class UpdateUserPasswordDto {
   @IsDefined()
@@ -6,7 +6,6 @@ export class UpdateUserPasswordDto {
   id: string;
 
   @IsDefined()
-  @MaxLength(6)
-  @MaxLength(20)
+  @Length(4,20)
   password: string;
 }
