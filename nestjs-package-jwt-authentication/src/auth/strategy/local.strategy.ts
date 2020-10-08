@@ -10,7 +10,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   }
 
   /**
-   * Passport expects a validate() method with the following signature: 
+   * Passport expects a validate() method with the following signature:
    * validate(username: string, password:string): any
    */
   async validate(username: string, password: string): Promise<any> {
@@ -18,6 +18,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException();
     }
-    return {username};
+    return user;
   }
 }
