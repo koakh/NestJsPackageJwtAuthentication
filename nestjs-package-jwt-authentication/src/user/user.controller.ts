@@ -1,4 +1,6 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UseFilters, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards';
+import { HttpExceptionFilter } from '../common/filters';
 import { CreateUserDto, UpdateUserDto, UpdateUserPasswordDto } from './dtos';
 import { User } from './models';
 import { UserService } from './user.service';
@@ -8,6 +10,7 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Get(':skip/:take')
+  @UseGuards(JwtAuthGuard)
   async findAll(
     @Param('skip', new ParseIntPipe()) skip?: number,
     @Param('take', new ParseIntPipe()) take?: number
@@ -16,6 +19,7 @@ export class UserController {
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   async findOneById(
     @Param('id') id?: string,
   ): Promise<User> {
@@ -27,6 +31,7 @@ export class UserController {
   }
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   async create(
     @Body() createUserDto: CreateUserDto
   ): Promise<User> {
@@ -34,6 +39,7 @@ export class UserController {
   }
 
   @Put(':id')
+  @UseGuards(JwtAuthGuard)
   async update(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto
@@ -42,14 +48,17 @@ export class UserController {
   }
 
   @Put(':id/password')
+  @UseGuards(JwtAuthGuard)
+  // @UseFilters(new HttpExceptionFilter())
   async updatePassword(
     @Param('id') id: string,
     @Body() updateUserPasswordDto: UpdateUserPasswordDto
-  ): Promise<User> {
+  ): Promise<void> {
     return await this.userService.updatePassword(id, updateUserPasswordDto);
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   async deleteOneById(
     @Param('id') id: string,
   ): Promise<void> {

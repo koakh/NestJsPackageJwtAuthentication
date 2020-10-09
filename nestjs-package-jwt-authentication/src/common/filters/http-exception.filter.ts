@@ -9,7 +9,6 @@ export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
     const statusCode = exception.getStatus();
     const { message, stack } = exception;
 
-    debugger;
     response.status(statusCode).json({
       statusCode,
       path: request.url,

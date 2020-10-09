@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Logger, Post, Request, Response, UseGuards, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Logger, Post, Request, Response, UseGuards, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../user/models';
@@ -56,13 +56,6 @@ export class AuthController {
     // this will invalidate the browser cookie refreshToken, only work with browser, not with insomnia etc
     this.authService.sendRefreshToken(res, { accessToken: '' });
     return res.send({ logOut: true });
-  }
-
-  // TODO: move to user
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
   }
 
   @Post('/refresh-token')

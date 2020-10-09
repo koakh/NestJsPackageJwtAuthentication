@@ -86,11 +86,11 @@ export class UserService {
     return { ...user, password: undefined };
   }
 
-  async updatePassword(id: string, updateUserPasswordDto: UpdateUserPasswordDto): Promise<User> {
+  async updatePassword(id: string, updateUserPasswordDto: UpdateUserPasswordDto): Promise<void> {
     await this.findOneById(id);
     const idx = userData.findIndex((e) => e.id === id);
     userData[idx].password = hashPassword(updateUserPasswordDto.password);
-    return { ...userData[idx], password: undefined };
+    return;
   }
 
   async deleteOneById(id: string): Promise<void> {
