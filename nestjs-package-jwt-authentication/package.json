@@ -1,7 +1,7 @@
 {
   "name": "@koakh/nestjs-package-jwt-authentication",
   "version": "1.0.0",
-  "description": "Koakh NestJS Jwt Authentication Package",
+  "description": "Koakh NestJS Jwt Authentication Starter Package",
   "author": "Mário Monteiro <marioammonteiro@gmail.com>",
   "license": "MIT",
   "readmeFilename": "README.md",
