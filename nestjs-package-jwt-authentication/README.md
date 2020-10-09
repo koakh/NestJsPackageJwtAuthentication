@@ -1,41 +1,91 @@
-<h1 align="center"></h1>
+# README
 
-<div align="center">
-  <a href="http://nestjs.com/" target="_blank">
-    <img src="https://nestjs.com/img/logo_text.svg" width="150" alt="Nest Logo" />
-  </a>
-</div>
+README in [GitHub: NestJsPackageJwtAuthentication](https://github.com/koakh/NestJsPackageJwtAuthentication/blob/main/README.md)
 
-<h3 align="center">NestJS npm Package Starter</h3>
+## Create a test package
 
-<div align="center">
-  <a href="https://nestjs.com" target="_blank">
-    <img src="https://img.shields.io/badge/built%20with-NestJs-red.svg" alt="Built with NestJS">
-  </a>
-</div>
-
-### Installation
-
-1. Clone the repo
-2. Run npm/yarn install
-
-```bash
-cd nestjs-package-starter
-npm install
+```shell
+# bootstrap a new nest test app
+$ nest new test
+$ cd test
+# install deps
+$ npm i @koakh/nestjs-package-jwt-authentication @nestjs/config
+# edit AppModule
+$ code src/app.module.ts
 ```
 
-## Change Log
+add `AuthModule` and `ConfigModule` from `@koakh/nestjs-package-jwt-authentication` and `@nestjs/config`
 
-See [Changelog](CHANGELOG.md) for more information.
+`src/app.module.ts`
 
-## Contributing
+```typescript
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { AuthModule } from '@koakh/nestjs-package-jwt-authentication';
+import { ConfigModule } from '@nestjs/config';
 
-Contributions welcome! See [Contributing](CONTRIBUTING.md).
+@Module({
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true, }),
+    AuthModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
+})
 
-## Author
+export class AppModule { }
+```
 
-**John Biundo (Y Prospect on [Discord](https://discord.gg/G7Qnnhy))**
+add a `test/.env` file
 
-## License
+```conf
+ACCESS_TOKEN_JWT_SECRET=secretKeyAccessToken
+ACCESS_TOKEN_EXPIRES_IN=15m
+REFRESH_TOKEN_JWT_SECRET=secretKeyRefreshToken
+REFRESH_TOKEN_EXPIRES_IN=7d
+REFRESH_TOKEN_SKIP_INCREMENT_VERSION=false
+```
 
-Licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Test Endpoints
+
+```shell
+# clone client.http
+wget https://raw.githubusercontent.com/koakh/NestJsPackageJwtAuthentication/main/client.http
+```
+
+> Note: required the awesome [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+now test all requests
+
+or test with a simple curl 
+
+```shell
+$ curl --request POST \
+  --url http://localhost:3000/auth/login \
+  --header 'content-type: application/json' \
+  --header 'user-agent: vscode-restclient' \
+  --data '{"username": "admin","password": "12345678"}' \
+  | jq
+
+{
+  "user": {
+    "id": "efeed3eb-c0a2-4b3e-816f-2a42ca8451b3",
+    "username": "admin",
+    "firstName": "Pietra",
+    "lastName": "Heine",
+    "email": "pheine0@illinois.edu",
+    "roles": [
+      "USER",
+      "ADMIN"
+    ],
+    "createdDate": 1597444307,
+    "metaData": {
+      "key": "value"
+    }
+  },
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwic3ViIjoiZWZlZWQzZWItYzBhMi00YjNlLTgxNmYtMmE0MmNhODQ1MWIzIiwicm9sZXMiOlsiVVNFUiIsIkFETUlOIl0sImlhdCI6MTYwMjI2MDk3NywiZXhwIjoxNjAyMjYxODc3fQ.-n6-xmrKIObquE10bKHnKRgzDvIFClkOQiVJMy8w0ew"
+}
+```
+
+we are done

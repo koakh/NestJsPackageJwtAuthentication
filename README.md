@@ -43,7 +43,8 @@ Now develop nestjs package and consumer app with hot reload
 ## Test Endpoint
 
 ```shell
-$ curl localhost:3000eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtvYWtoIiwic3ViIjoyOCwiaWF0IjoxNjAxOTc2Nzk2LCJleHAiOjE2MDE5NzY4NTZ9.1Em2ZMayqtDC2DQ0_osMjzrgsIhcXDyNtncP7GeZzg8
+$ curl localhost:3000
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtvYWtoIiwic3ViIjoyOCwiaWF0IjoxNjAxOTc2Nzk2LCJleHAiOjE2MDE5NzY4NTZ9.1Em2ZMayqtDC2DQ0_osMjzrgsIhcXDyNtncP7GeZzg8
 ```
 
 ## Test all endpoints with client.http file
