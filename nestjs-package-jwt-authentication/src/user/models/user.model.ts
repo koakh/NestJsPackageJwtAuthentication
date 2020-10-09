@@ -26,7 +26,7 @@ export class User {
   email: string;
 
   @IsArray()
-  roles: string[];
+  roles?: string[];
 
   @IsDefined()
   @IsNumber()

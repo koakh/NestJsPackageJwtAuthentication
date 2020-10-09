@@ -6,7 +6,7 @@ export type UserData = {
   firstName: string,
   lastName: string,
   email: string,
-  roles: string[],
+  roles?: string[],
   createdDate: number,
-  metaData: object,
+  metaData?: object,
 }

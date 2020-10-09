@@ -1,12 +1,22 @@
-import { IsArray, IsOptional, IsUUID } from 'class-validator';
+import { IsArray, IsDefined, IsEmail, IsOptional, MaxLength } from 'class-validator';
 
 export class UpdateUserDto {
-  @IsUUID()
-  id: string;
+  @IsDefined()
+  @MaxLength(40)
+  firstName: string;
 
-  @IsArray()
-  roles: string[];
+  @IsDefined()
+  @MaxLength(40)
+  lastName: string;
 
   @IsOptional()
-  metaDataInternal: any;
+  @IsEmail()
+  email: string;
+
+  @IsOptional()
+  metaData: any;
+
+  @IsArray()
+  @IsOptional()
+  roles?: string[];
 }

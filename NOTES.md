@@ -18,7 +18,7 @@
   - [Test TypescriptNestJsPackageJwtAuthentication with userService](#test-typescriptnestjspackagejwtauthentication-with-userservice)
   - [Use Cookies](#use-cookies)
   - [Good way to use refreshTokenJwtSecret](#good-way-to-use-refreshtokenjwtsecret)
-  - [Fuck solving the problem of wrong verify refreshTokje](#fuck-solving-the-problem-of-wrong-verify-refreshtokje)
+  - [Fuck solving the problem of wrong verify refreshTen](#fuck-solving-the-problem-of-wrong-verify-refreshten)
 
 ## Starter Project
 
@@ -424,7 +424,8 @@ async signRefreshToken(user: any, tokenVersion: number, options?: SignOptions): 
 }
 ```
 
-## Fuck solving the problem of wrong verify refreshTokje
+## Fuck solving the problem of wrong verify refreshTen
+
 > Fuck now we must use `this.jwtService.verify(token, { secret: this.config.refreshTokenJwtSecret})` and not `this.jwtService.verify(token, this.config.refreshTokenJwtSecret)`, like we use in the past
 
 this occurs only when we use other secret, like we use in refreshTokens, in normal verifies we use only `this.jwtService.verify(token);`

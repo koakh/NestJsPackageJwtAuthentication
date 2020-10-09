@@ -15,7 +15,8 @@
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ],
-      "envFile": "${workspaceFolder}/nestjs-package-jwt-authentication-consumer/.env"
+      "envFile": "${workspaceFolder}/nestjs-package-jwt-authentication-consumer/.env",
+      "outputCapture": "std"
     }
   ]
 }

@@ -1,6 +1,6 @@
 import { IsDefined, IsEmail, IsOptional, IsUUID, Length, MaxLength } from 'class-validator';
 
-export class NewUserDto {
+export class CreateUserDto {
   @IsOptional()
   @IsUUID()
   id?: string;

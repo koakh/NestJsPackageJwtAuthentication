@@ -51,83 +51,63 @@ Authorization: Bearer {{authToken}}
 {
 }
 
+### userFindAll  // @HttpCode(204)
+
+// @name userFindAll
+
+@skip = 0
+@take = 50
+GET {{uri}}/users/{{skip}}/{{take}} HTTP/1.1
+
+
+### userFindById
+// @name userFindById
+@userId = {{userFindAll.response.body.$.[0].id}}
+
+GET {{uri}}/users/{{userId}} HTTP/1.1
+
 ### userCreate
 // @name userCreate
 
-POST {{uri}}/user HTTP/1.1
+POST {{uri}}/users HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-  "userName": "mario.monteiro",
-  "age": 28,
+  "username": "mario.monteiro",
+  "password": "secret",
   "firstName": "Mário",
   "lastName": "Monteiro",
   "email":"mario.monteiro@critical-links.com"
 }
 
-### userFindAll  // @HttpCode(204)
-
-// @name userFindAll
-
-GET {{uri}}/user HTTP/1.1
-
-### findByIdUser
-// @name findByIdUser
-@userId = {{userFindAll.response.body.$.data[0]._id}}
-
-GET {{uri}}/user/{{userId}} HTTP/1.1
-
 ### userUpdate
 // @name userUpdate
-@userId = {{userFindAll.response.body.$.data[0]._id}}
+@userId = {{userFindAll.response.body.$.[0].id}}
 
-PUT {{uri}}/user/{{userId}} HTTP/1.1
+PUT {{uri}}/users/{{userId}} HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-  "age": 82,
-  "email":"mario.monteiro@critical-links.com"
+  "firstName": "Alexandre",
+  "lastName": "Monteiro",
+  "email":"alexandre.monteiro@critical-links.com",
+  "metaData": { "key": "value"},
+  "roles": [ "USER","ADMIN" ]
 }
 
-### userUpdateStatus
-// @name userUpdateStatus
-@userId = {{userFindAll.response.body.$.data[0]._id}}
+### userUpdatePassword
+// @name userUpdatePassword
+@userId = {{userFindAll.response.body.$.[0].id}}
 
-PATCH {{uri}}/user/{{userId}}/status HTTP/1.1
+PUT {{uri}}/users/{{userId}}/password HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-  "status": "ENABLED"
+  "password": "87654321"
 }
 
 ### userDelete
 // @name userDelete
-@userId = {{userFindAll.response.body.$.data[0]._id}}
+@userId = {{userFindAll.response.body.$.[0].id}}
 
-DELETE {{uri}}/user/{{userId}} HTTP/1.1
-
-# ### query: userById
-
-# // @name userById
-
-# POST {{uri}} HTTP/1.1
-# Content-Type: {{contentType}}
-# Authorization: Bearer {{authToken}}
-# X-REQUEST-TYPE: {{requestType}}
-
-# query userById($id: String!){
-#   userById(id:$id) {
-#     id
-#     username
-#     firstName
-#     lastName
-#     email
-#     roles
-#     createdDate
-#     metaData   
-#   }
-# }
-
-# {
-#   "id": "{{userIdAdmin}}"
-# }
+DELETE {{uri}}/users/{{userId}} HTTP/1.1
