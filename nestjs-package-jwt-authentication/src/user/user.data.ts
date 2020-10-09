@@ -1,6 +1,6 @@
-import { UserData } from './interfaces/user-data.interface';
+import { UserDataInterface } from './interfaces/user-data.interface';
 
-export const userData: UserData[] = [{
+export const userData: UserDataInterface[] = [{
   id: 'efeed3eb-c0a2-4b3e-816f-2a42ca8451b3',
   username: 'admin',
   password: '$2b$10$U9AVUdkRnFsrMjPg/XyTeOWmF.gu73gd1hJGR1s1OnKTshjJYdGpW',

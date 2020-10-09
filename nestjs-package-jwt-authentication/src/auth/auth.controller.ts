@@ -1,17 +1,16 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Logger, Post, Request, Response, UseGuards, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Request, Response, UseGuards } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '../user/models';
 import { envConstants } from '../common/constants/env';
-import { LoginUserDto, LoginUserResponseDto } from '../user/dtos';
+import { LoginUserDto } from '../user/dtos';
+import { User } from '../user/models';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
+import { RevokeRefreshTokenDto } from './dto/revoke-refresh-token.dto';
 import { JwtAuthGuard } from './guards';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import AccessToken from './interfaces/access-token';
 import { JwtResponsePayload } from './interfaces/jwt-response.payload';
-import { SigningOptions } from 'crypto';
-import { RevokeRefreshTokenDto } from './dto/revoke-refresh-token.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -21,7 +20,6 @@ export class AuthController {
     private readonly jwtService: JwtService,
     private readonly userService: UserService,
   ) { }
-  // POST:auth/login
   @Post('login')
   @UseGuards(LocalAuthGuard)
   async logIn(
@@ -46,7 +44,6 @@ export class AuthController {
     return res.send({ user: returnUser, accessToken });
   }
 
-  // POST:auth/logout
   @Post('logout')
   @UseGuards(JwtAuthGuard)
   async logOut(

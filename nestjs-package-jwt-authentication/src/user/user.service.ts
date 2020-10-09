@@ -1,17 +1,18 @@
-import { HttpException, HttpStatus, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { hashPassword } from '../auth/utils';
 import { UpdateUserDto, UpdateUserPasswordDto } from './dtos';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UserRoles } from './enums';
-import { UserData } from './interfaces/user-data.interface';
+import { UserModelInterface, UserServiceInterface } from './interfaces';
+import { UserDataInterface } from './interfaces/user-data.interface';
 import { User } from './models';
 import { userData } from './user.data';
 import { UserStore } from './user.store';
 import { newUuid } from './utils';
 
 @Injectable()
-export class UserService {
+export class UserService implements UserServiceInterface {
   // init usersStore
   usersStore: UserStore = new UserStore(this.configService);
 
@@ -20,7 +21,7 @@ export class UserService {
   ) {
   }
 
-  async findAll(skip: number, take: number): Promise<User[]> {
+  async findAll(skip: number, take: number): Promise<UserModelInterface[]> {
     // clone array before slice it
     const data = userData.slice()
       .map(e => { return { ...e, password: undefined } });
@@ -32,7 +33,7 @@ export class UserService {
 
   // internal helper to validate existing users
   async findOneById(id: string): Promise<User> {
-    const user = userData.find((e: UserData) => e.id === id);
+    const user = userData.find((e: UserDataInterface) => e.id === id);
     if (!user) {
       throw new NotFoundException(`userId not found`);
     }
@@ -41,7 +42,7 @@ export class UserService {
   }
 
   async findOneByField(field: string, value: string): Promise<User> {
-    const user = userData.find((e: UserData) => e[field] === value);
+    const user = userData.find((e: UserDataInterface) => e[field] === value);
     if (!user) {
       throw new NotFoundException(`userId not found`);
     }
@@ -50,7 +51,7 @@ export class UserService {
 
   async findOneByUsername(username: string): Promise<User> {
     try {
-      return userData.find((e: UserData) => e.username === username);
+      return userData.find((e: UserDataInterface) => e.username === username);
     } catch (error) {
       // const errorMessage: string = (error.responses[0]) ? error.responses[0].error.message : 'Internal server error';
       // throw new HttpException({ status: HttpStatus.CONFLICT, error: errorMessage }, HttpStatus.NOT_FOUND);

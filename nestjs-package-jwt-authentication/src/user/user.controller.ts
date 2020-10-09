@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UseFilters, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards';
-import { HttpExceptionFilter } from '../common/filters';
 import { CreateUserDto, UpdateUserDto, UpdateUserPasswordDto } from './dtos';
+import { UserModelInterface } from './interfaces';
 import { User } from './models';
 import { UserService } from './user.service';
 
@@ -14,7 +14,7 @@ export class UserController {
   async findAll(
     @Param('skip', new ParseIntPipe()) skip?: number,
     @Param('take', new ParseIntPipe()) take?: number
-  ): Promise<User[]> {
+  ): Promise<UserModelInterface[]> {
     return await this.userService.findAll(skip, take);
   }
 
@@ -22,7 +22,7 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   async findOneById(
     @Param('id') id?: string,
-  ): Promise<User> {
+  ): Promise<UserModelInterface> {
     const user = await this.userService.findOneByField('id', id);
     if (!user) {
       throw new NotFoundException(`user not found`);
@@ -34,7 +34,7 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   async create(
     @Body() createUserDto: CreateUserDto
-  ): Promise<User> {
+  ): Promise<UserModelInterface> {
     return await this.userService.create(createUserDto);
   }
 
@@ -43,7 +43,7 @@ export class UserController {
   async update(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto
-  ): Promise<User> {
+  ): Promise<UserModelInterface> {
     return await this.userService.update(id, updateUserDto);
   }
 

@@ -9,4 +9,3 @@ export const paginateArray = (data: any, skip: number, take: number) => {
     data.push(data.slice(i * 2, i * 2 + 2));
   }
 };
-

@@ -1,5 +1,4 @@
-
-export type UserData = {
+export type UserDataInterface = {
   id: string,
   username: string,
   password: string,
