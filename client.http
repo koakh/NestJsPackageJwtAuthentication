@@ -57,7 +57,7 @@ Authorization: Bearer {{authToken}}
 @authToken = {{authLogIn.response.body.$.accessToken}}
 @skip = 0
 @take = 50
-GET {{uri}}/users/{{skip}}/{{take}} HTTP/1.1
+GET {{uri}}/user/{{skip}}/{{take}} HTTP/1.1
 Authorization: Bearer {{authToken}}
 
 ### userFindById
@@ -65,14 +65,14 @@ Authorization: Bearer {{authToken}}
 @userId = {{userFindAll.response.body.$.[0].id}}
 @authToken = {{authLogIn.response.body.$.accessToken}}
 
-GET {{uri}}/users/{{userId}} HTTP/1.1
+GET {{uri}}/user/{{userId}} HTTP/1.1
 Authorization: Bearer {{authToken}}
 
 ### userCreate
 // @name userCreate
 @authToken = {{authLogIn.response.body.$.accessToken}}
 
-POST {{uri}}/users HTTP/1.1
+POST {{uri}}/user HTTP/1.1
 Content-Type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
@@ -89,7 +89,7 @@ Authorization: Bearer {{authToken}}
 @userId = {{userFindAll.response.body.$.[0].id}}
 @authToken = {{authLogIn.response.body.$.accessToken}}
 
-PUT {{uri}}/users/{{userId}} HTTP/1.1
+PUT {{uri}}/user/{{userId}} HTTP/1.1
 Content-Type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
@@ -106,7 +106,7 @@ Authorization: Bearer {{authToken}}
 @authToken = {{authLogIn.response.body.$.accessToken}}
 @userId = {{userFindAll.response.body.$.[0].id}}
 
-PUT {{uri}}/users/{{userId}}/password HTTP/1.1
+PUT {{uri}}/user/{{userId}}/password HTTP/1.1
 Content-Type: {{contentType}}
 Authorization: Bearer {{authToken}}
 
@@ -119,5 +119,38 @@ Authorization: Bearer {{authToken}}
 @authToken = {{authLogIn.response.body.$.accessToken}}
 @userId = {{userFindAll.response.body.$.[0].id}}
 
-DELETE {{uri}}/users/{{userId}} HTTP/1.1
+DELETE {{uri}}/user/{{userId}} HTTP/1.1
 Authorization: Bearer {{authToken}}
+
+### userProfile
+// @name userProfile
+@authToken = {{authLogIn.response.body.$.accessToken}}
+
+GET {{uri}}/user/profile HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### updateProfile
+// @name updateProfile
+@authToken = {{authLogIn.response.body.$.accessToken}}
+
+PUT {{uri}}/user/{{userId}} HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "firstName": "Alexandre",
+  "lastName": "Monteiro",
+  "email":"alexandre.monteiro@critical-links.com"
+}
+
+### updateProfilePassword
+// @name updateProfilePassword
+@authToken = {{authLogIn.response.body.$.accessToken}}
+
+PUT {{uri}}/user/{{userId}}/password HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "password": "87654321"
+}

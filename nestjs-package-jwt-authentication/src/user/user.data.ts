@@ -7,7 +7,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Pietra',
   lastName: 'Heine',
   email: 'pheine0@illinois.edu',
-  roles: ['USER', 'ADMIN'],
+  roles: ['ROLE_USER', 'ROLE_ADMIN'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -17,7 +17,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Katinka',
   lastName: 'Trett',
   email: 'ktrett1@livejournal.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -27,7 +27,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Sonny',
   lastName: 'Stert',
   email: 'sstert2@ask.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -37,7 +37,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Gram',
   lastName: 'Natte',
   email: 'gnatte3@i2i.jp',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -47,7 +47,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Zed',
   lastName: 'Espinheira',
   email: 'zespinheira4@bandcamp.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -57,7 +57,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Elfrida',
   lastName: 'Jessope',
   email: 'ejessope5@plala.or.jp',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -67,7 +67,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Willow',
   lastName: 'Mewrcik',
   email: 'wmewrcik6@elegantthemes.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -77,7 +77,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Brittni',
   lastName: 'Persey',
   email: 'bpersey7@paypal.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -87,7 +87,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Keely',
   lastName: 'Bertholin',
   email: 'kbertholin8@cbc.ca',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -97,7 +97,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Addy',
   lastName: 'Slater',
   email: 'aslater9@altervista.org',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -107,7 +107,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Orbadiah',
   lastName: 'Larkins',
   email: 'olarkinsa@prlog.org',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -117,7 +117,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Lidia',
   lastName: 'Dixie',
   email: 'ldixieb@eventbrite.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -127,7 +127,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Adelice',
   lastName: 'Ludvigsen',
   email: 'aludvigsenc@cyberchimps.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -137,7 +137,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Peter',
   lastName: 'Robard',
   email: 'probardd@devhub.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -147,7 +147,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Chloette',
   lastName: 'Spreadbury',
   email: 'cspreadburye@xinhuanet.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -157,7 +157,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Vincenty',
   lastName: 'Heavens',
   email: 'vheavensf@nbcnews.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -167,7 +167,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Rae',
   lastName: 'O\'Quin',
   email: 'roquing@uiuc.edu',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -177,7 +177,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Louisa',
   lastName: 'Cullotey',
   email: 'lculloteyh@jimdo.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -187,7 +187,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Nathaniel',
   lastName: 'Slora',
   email: 'nslorai@instagram.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -197,7 +197,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Ferdinand',
   lastName: 'Blest',
   email: 'fblestj@ask.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -207,7 +207,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Ardella',
   lastName: 'Scroxton',
   email: 'ascroxtonk@scientificamerican.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -217,7 +217,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Thelma',
   lastName: 'Tuer',
   email: 'ttuerl@tripod.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -227,7 +227,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Oran',
   lastName: 'Penberthy',
   email: 'openberthym@sitemeter.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -237,7 +237,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Monty',
   lastName: 'Brimley',
   email: 'mbrimleyn@exblog.jp',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -247,7 +247,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Alyosha',
   lastName: 'Grimshaw',
   email: 'agrimshawo@cbc.ca',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -257,7 +257,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Randal',
   lastName: 'Johncey',
   email: 'rjohnceyp@skyrock.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -267,7 +267,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Dre',
   lastName: 'Raftery',
   email: 'drafteryq@google.ca',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }, {
@@ -277,7 +277,7 @@ export const userData: UserDataInterface[] = [{
   firstName: 'Bradan',
   lastName: 'Cockshot',
   email: 'bcockshotr@163.com',
-  roles: ['USER'],
+  roles: ['ROLE_USER'],
   createdDate: 1597444307,
   metaData: { key: 'value' }
 }];

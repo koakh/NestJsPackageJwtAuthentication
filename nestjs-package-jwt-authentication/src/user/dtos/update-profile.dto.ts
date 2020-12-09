@@ -1,6 +1,6 @@
 import { IsArray, IsDefined, IsEmail, IsOptional, MaxLength } from 'class-validator';
 
-export class UpdateUserDto {
+export class UpdateProfileDto {
   @IsDefined()
   @MaxLength(40)
   firstName: string;
@@ -12,11 +12,4 @@ export class UpdateUserDto {
   @IsOptional()
   @IsEmail()
   email: string;
-
-  @IsOptional()
-  metaData?: any;
-
-  @IsArray()
-  @IsOptional()
-  roles?: string[];
 }

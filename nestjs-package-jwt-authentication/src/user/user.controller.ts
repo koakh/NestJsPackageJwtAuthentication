@@ -1,15 +1,56 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Request, UseGuards } from '@nestjs/common';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { Roles as UserRoles } from '../auth/enums';
 import { JwtAuthGuard, RolesAuthGuard } from '../auth/guards';
 import { CreateUserDto, UpdateUserDto, UpdateUserPasswordDto } from './dtos';
 import { UserModelInterface } from './interfaces';
 import { UserService } from './user.service';
-import { Roles as UserRoles} from '../auth/enums';
-import { Roles } from '../auth/decorators/roles.decorator';
 
-@Controller('users')
+@Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) { }
+  
+  // helper method to check valid logged user
+  checkAuthUser (req: Request) {
+    if (!(req as any).user || !(req as any).user.userId) {
+      throw new NotFoundException(`invalid authenticated user`);
+    }
+  }
 
+  // require to be prior to @Get(':id') else we match @Get(':id')
+  @Get('/profile')
+  @UseGuards(JwtAuthGuard)
+  async getProfile(
+    @Request() req,
+  ): Promise<UserModelInterface> {
+    this.checkAuthUser(req);
+    const user = await this.userService.findOneByField('id', req.user.userId);
+    if (!user) {
+      throw new NotFoundException(`user not found`);
+    }
+    return user;
+  }
+
+  // require to be prior to @Put(':id') else we match @Put(':id')
+  @Put('/profile')
+  @UseGuards(JwtAuthGuard)
+  async updateProfile(
+    @Request() req,
+    @Body() updateProfileDto: UpdateUserDto
+  ): Promise<UserModelInterface> {
+    this.checkAuthUser(req);
+    return await this.userService.update(req.user.userId, updateProfileDto);
+  }
+
+  @Put('/profile/password')
+  async setProfilePassword(
+    @Request() req,
+    @Body() updateUserPasswordDto: UpdateUserPasswordDto
+  ): Promise<void> {
+    this.checkAuthUser(req);
+    return await this.userService.updatePassword(req.user.userId, updateUserPasswordDto);
+  }  
+  
   @Get(':skip/:take')
   @UseGuards(JwtAuthGuard)
   async findAll(
@@ -32,9 +73,9 @@ export class UserController {
   }
 
   @Post()
-  @Roles(UserRoles.ADMIN)
+  // @Roles and @UseGuards(RolesAuthGuard) require to be before @UseGuards(JwtAuthGuard) else we don't have jwt user injected
+  @Roles(UserRoles.ROLE_ADMIN)
   @UseGuards(RolesAuthGuard)
-  // require to be after @Roles, @UseGuards
   @UseGuards(JwtAuthGuard)
   async create(
     @Body() createUserDto: CreateUserDto
@@ -43,6 +84,8 @@ export class UserController {
   }
 
   @Put(':id')
+  @Roles(UserRoles.ROLE_ADMIN)
+  @UseGuards(RolesAuthGuard)
   @UseGuards(JwtAuthGuard)
   async update(
     @Param('id') id: string,
@@ -52,6 +95,8 @@ export class UserController {
   }
 
   @Put(':id/password')
+  @Roles(UserRoles.ROLE_ADMIN)
+  @UseGuards(RolesAuthGuard)
   @UseGuards(JwtAuthGuard)
   // @UseFilters(new HttpExceptionFilter())
   async updatePassword(
@@ -62,6 +107,8 @@ export class UserController {
   }
 
   @Delete(':id')
+  @Roles(UserRoles.ROLE_ADMIN)
+  @UseGuards(RolesAuthGuard)
   @UseGuards(JwtAuthGuard)
   async deleteOneById(
     @Param('id') id: string,
