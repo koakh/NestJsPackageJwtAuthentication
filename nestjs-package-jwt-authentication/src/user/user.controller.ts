@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards';
+import { JwtAuthGuard, RolesAuthGuard } from '../auth/guards';
 import { CreateUserDto, UpdateUserDto, UpdateUserPasswordDto } from './dtos';
 import { UserModelInterface } from './interfaces';
-import { User } from './models';
 import { UserService } from './user.service';
+import { Roles as UserRoles} from '../auth/enums';
+import { Roles } from '../auth/decorators/roles.decorator';
 
 @Controller('users')
 export class UserController {
@@ -31,6 +32,9 @@ export class UserController {
   }
 
   @Post()
+  @Roles(UserRoles.ADMIN)
+  @UseGuards(RolesAuthGuard)
+  // require to be after @Roles, @UseGuards
   @UseGuards(JwtAuthGuard)
   async create(
     @Body() createUserDto: CreateUserDto

@@ -31,7 +31,8 @@ $ npm run start:dev
 ```shell
 # in terminal #2
 $ cd nestjs-package-jwt-authentication-consumer
-# start in dev or debug
+# start in normal, dev or debug
+$ npm run start
 $ npm run start:dev
 $ npm run start:debug
 ```

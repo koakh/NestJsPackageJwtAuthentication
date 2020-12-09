@@ -50,7 +50,7 @@ export class AuthService {
         ...options,
         // require to use refreshTokenJwtSecret
         secret: this.configService.get(envConstants.REFRESH_TOKEN_JWT_SECRET),
-        expiresIn: this.configService.get(envConstants.ACCESS_TOKEN_EXPIRES_IN),
+        expiresIn: this.configService.get(envConstants.REFRESH_TOKEN_EXPIRES_IN),
       }),
     };
   }
