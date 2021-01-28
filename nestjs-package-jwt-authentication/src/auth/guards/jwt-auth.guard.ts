@@ -1,4 +1,4 @@
-import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ExecutionContext, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Observable } from 'rxjs';
 
@@ -16,8 +16,18 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   handleRequest(err, user, info) {
     // You can throw an exception based on either "info" or "err" arguments
     if (info) {
-      // Logger.error(info, JwtAuthGuard.name);
-      throw new UnauthorizedException(`${info.message}`)
+      let errorMessage;
+      switch (info.message) {
+        case 'jwt expired':
+          errorMessage = `${info.message}: ${info.expiredAt}`
+          Logger.error(errorMessage, null, JwtAuthGuard.name);
+          break;
+        default:
+          Logger.error(info.message ? info.message : info, null, JwtAuthGuard.name);
+          break;
+      }
+      // const message = `${info.message} at ${info.expiredAt}`;
+      throw new UnauthorizedException(info.message);
     }
     if (err || !user) {
       throw err || new UnauthorizedException();
