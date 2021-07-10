@@ -23,7 +23,7 @@ watch for it, will me named as:
 ```shell
 # in terminal #1
 $ cd nestjs-package-jwt-authentication
-$ npm run start:dev
+$ npm run dev
 ```
 
 ## Start Consumer App
@@ -33,7 +33,7 @@ $ npm run start:dev
 $ cd nestjs-package-jwt-authentication-consumer
 # start in normal, dev or debug
 $ npm run start
-$ npm run start:dev
+$ npm run dev
 $ npm run start:debug
 ```
 

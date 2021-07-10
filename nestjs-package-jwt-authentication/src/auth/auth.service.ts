@@ -42,6 +42,7 @@ export class AuthService {
     };
   }
 
+  // refresh token as extra version
   async signRefreshToken(user: any, tokenVersion: number, options?: SignOptions): Promise<AccessToken> {
     const payload = { username: user.username, sub: user.userId, roles: user.roles, tokenVersion };
     return {

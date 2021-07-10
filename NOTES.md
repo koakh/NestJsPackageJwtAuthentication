@@ -4,6 +4,7 @@
   - [Starter Project](#starter-project)
     - [Links](#links)
     - [TLDR](#tldr)
+    - [Debug package and consumer App](#debug-package-and-consumer-app)
     - [Read base Starter Notes](#read-base-starter-notes)
     - [Commit project and get comment id 6b178be](#commit-project-and-get-comment-id-6b178be)
     - [Now clone project and create a Starter from it](#now-clone-project-and-create-a-starter-from-it)
@@ -40,17 +41,17 @@ used node version `node/v12.8.1`
 
 ```shell
 # package watch: in term1: build and watch
-$ cd nestjs-package-jwt-authentication-ldap
-$ npm run start:dev
+$ cd nestjs-package-jwt-authentication
+$ npm run dev
 
 # consumer app (api)
-# now press f5 to debug consumer app (without launch npm run start:dev)
+# now press f5 to debug consumer app (without launch npm run dev)
 # after changes in package, restart debugger with ctrl+shift+f5
 # wait for...in debug console
 [NestApplication] Nest application successfully started +2ms
 ```
 
-> to debug use `launch.json` with [F5]
+> to debug use `launch.json` with [F5] and it will launch consumer app in debug mode, simply works
 
 ### Read base Starter Notes
 
@@ -179,7 +180,7 @@ export * from './auth/types';
 # don't forget to build package else we can't import it in consumer app
 $ npm run build
 # or 
-$ npm run start:dev
+$ npm run dev
 ```
 
 done with package
@@ -313,7 +314,7 @@ now install `@nestjs/config` on package `nestjs-package-jwt-authentication` only
 $ cd nestjs-package-jwt-authentication
 $ npm i @nestjs/config
 #  build package
-npm run start:dev
+npm run dev
 ```
 
 if we lauch `npm run start:debug` and fire one test curl we get `curl localhost:3000` we get bellow error that proves that we are using a empty `ACCESS_TOKEN_JWT_SECRET`
@@ -351,7 +352,7 @@ done now it works with environment variables
 $ cd nestjs-package-jwt-authentication
 $ npm i @nestjs/passport passport-local passport-jwt bcrypt
 #  build package
-$ npm run start:dev
+$ npm run dev
 ```
 
 after some hours working...........

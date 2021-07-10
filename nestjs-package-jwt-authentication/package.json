@@ -11,7 +11,7 @@
     "*.md"
   ],
   "scripts": {
-    "start:dev": "tsc -w",
+    "dev": "tsc -w",
     "build": "tsc",
     "prepare": "npm run build",
     "format": "prettier --write \"src/**/*.ts\"",

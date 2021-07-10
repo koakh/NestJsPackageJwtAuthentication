@@ -12,6 +12,6 @@
     "baseUrl": "./",
     "noLib": false
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/auth/decorators/current-user.decorator.ts_DELETE"],
   "exclude": ["node_modules"]
 }

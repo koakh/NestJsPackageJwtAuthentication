@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Request, UseGuards } from '@nestjs/common';
-import { Roles } from '../auth/decorators/roles.decorator';
+import { Roles } from '../auth/decorators';
 import { Roles as UserRoles } from '../auth/enums';
 import { JwtAuthGuard, RolesAuthGuard } from '../auth/guards';
 import { CreateUserDto, UpdateUserDto, UpdateUserPasswordDto } from './dtos';

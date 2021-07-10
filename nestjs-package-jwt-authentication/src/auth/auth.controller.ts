@@ -1,13 +1,15 @@
-import { Body, Controller, HttpStatus, Post, Request, Response, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Logger, Post, Request, Response, UseGuards } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { Roles as UserRoles } from '../auth/enums';
 import { envConstants } from '../common/constants/env';
 import { LoginUserDto } from '../user/dtos';
 import { User } from '../user/models';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 import { RevokeRefreshTokenDto } from './dto/revoke-refresh-token.dto';
-import { JwtAuthGuard } from './guards';
+import { JwtAuthGuard, RolesAuthGuard } from './guards';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import AccessToken from './interfaces/access-token';
 import { JwtResponsePayload } from './interfaces/jwt-response.payload';
@@ -45,10 +47,15 @@ export class AuthController {
   }
 
   @Post('logout')
+  @Roles(UserRoles.ROLE_USER)
+  @UseGuards(RolesAuthGuard)
   @UseGuards(JwtAuthGuard)
   async logOut(
-    @Response() res
+    @Request() req,
+    @Response() res,
   ): Promise<void> {
+    Logger.log(`user ${JSON.stringify(req.user, undefined, 2)}`, AuthController.name);
+    this.userService.usersStore.incrementTokenVersion(req.user.username);
     // send empty refreshToken, with same name jid, etc, better than res.clearCookie
     // this will invalidate the browser cookie refreshToken, only work with browser, not with insomnia etc
     this.authService.sendRefreshToken(res, { accessToken: '' });
@@ -56,6 +63,9 @@ export class AuthController {
   }
 
   @Post('/refresh-token')
+  @Roles(UserRoles.ROLE_USER)
+  @UseGuards(RolesAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async refreshToken(
     @Request() req,
     @Response() res,
@@ -72,6 +82,7 @@ export class AuthController {
     }
 
     let payload: JwtResponsePayload;
+    // get accessToken object with 
     try {
       // Logger.log(`refreshTokenJwtSecret: '${this.configService.get(envConstants.REFRESH_TOKEN_JWT_SECRET)}'`, AuthController.name);
       payload = this.jwtService.verify(token, { secret: this.configService.get(envConstants.REFRESH_TOKEN_JWT_SECRET) });
@@ -93,10 +104,14 @@ export class AuthController {
       return invalidPayload();
     }
 
-    // refresh the refreshToken on accessToken, this way we extended/reset refreshToken validity to default value
-    const loginUserDto: LoginUserDto = { username: user.username, password: user.password };
+  // refresh the refreshToken on accessToken, this way we extended/reset refreshToken validity to default value
+// const loginUserDto: LoginUserDto = { username: user.username, password: user.password };
+// accessToken: add some user data to it, like id and roles
+const signJwtTokenDto = { username: user.username, userId: user.id, roles: user.roles };
+
     // we don't increment tokenVersion here, only when we login, this way refreshToken is always valid until we login again
-    const refreshToken: AccessToken = await this.authService.signRefreshToken(loginUserDto, tokenVersion);
+// const refreshToken: AccessToken = await this.authService.signRefreshToken(loginUserDto, tokenVersion);
+const refreshToken: AccessToken = await this.authService.signRefreshToken(signJwtTokenDto, tokenVersion);
     // send refreshToken in response/setCookie
     this.authService.sendRefreshToken(res, refreshToken);
 
@@ -106,6 +121,9 @@ export class AuthController {
 
   // Don't expose this resolver, only used in development environments
   @Post('/revoke-refresh-token')
+  @Roles(UserRoles.ROLE_ADMIN)
+  @UseGuards(RolesAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async revokeUserRefreshToken(
     @Body('username') username: string,
   ): Promise<RevokeRefreshTokenDto> {
