@@ -1,0 +1,65 @@
+refresh cookie
+
+{
+  "username": "admin",
+  "sub": "efeed3eb-c0a2-4b3e-816f-2a42ca8451b3",
+  "roles": [
+    "ROLE_USER",
+    "ROLE_ADMIN"
+  ],
+  "tokenVersion": 1,
+  "iat": 1626214200,
+  "exp": 1626819000
+}
+
+auth token
+
+{
+  "username": "admin",
+  "sub": "efeed3eb-c0a2-4b3e-816f-2a42ca8451b3",
+  "roles": [
+    "ROLE_USER",
+    "ROLE_ADMIN"
+  ],
+  "iat": 1626214200,
+  "exp": 1626215100
+}
+
+
+test
+1. user login
+2. test 
+  userFindAll               works
+  userFindById              works
+  userCreate                works
+  userUpdate                works
+  userUpdatePassword        works
+  userDelete                works
+  userProfile               works after updateProfile?
+  updateProfile             works
+  updateProfilePassword     works 
+3. authRevokeRefreshToken
+  increase version
+  {
+    "version": 1
+  }
+4. authRefreshToken     fails after we increase version, the version of inmemory doesnt match the version of refresh token
+5. wait for authToken expires
+  after time when we use a guarded operation we receive
+  {
+    "statusCode": 401,
+    "path": "/user/0/50",
+    "timestamp": "2021-07-13T22:31:52.401Z",
+    "error": "jwt expired"
+  }  
+
+
+
+
+notes: when logout always sent refreshToken (cookie) but we keep authToken in client ex and it still works until expires, but refreshToken will fail, that's not bad, auth token is short live
+
+
+test created user mario.monteiro
+
+
+CurrentUser for GraphQL
