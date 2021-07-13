@@ -1,0 +1,11 @@
+GraphQL Starter:
+
+☐ Add to GraphQL Starter with React :)
+  ☐ with CurrentUser Working
+☐ Use it in Neo4j Starter, create a starter with users from Neo4j
+  ☐ How to use CurrentUser in schema-first, figure it out in Neo4j lib code
+  ☐ Subscripions how to
+
+GraphQL:
+
+☐ Add CurrentUser for GraphQL, and Context, get from SolidaryChain

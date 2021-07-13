@@ -2,7 +2,7 @@
 
 README in [GitHub: NestJsPackageJwtAuthentication](https://github.com/koakh/NestJsPackageJwtAuthentication/blob/main/README.md)
 
-## Create a test package
+## Create a test Application with NestJsPackageJwtAuthentication
 
 ```shell
 # bootstrap a new nest test app

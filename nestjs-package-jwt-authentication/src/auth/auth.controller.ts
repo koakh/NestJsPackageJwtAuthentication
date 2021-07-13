@@ -104,17 +104,18 @@ export class AuthController {
       return invalidPayload();
     }
 
-  // refresh the refreshToken on accessToken, this way we extended/reset refreshToken validity to default value
-// const loginUserDto: LoginUserDto = { username: user.username, password: user.password };
-// accessToken: add some user data to it, like id and roles
-const signJwtTokenDto = { username: user.username, userId: user.id, roles: user.roles };
+    // refresh the refreshToken on accessToken, this way we extended/reset refreshToken validity to default value
+    // const loginUserDto: LoginUserDto = { username: user.username, password: user.password };
+    // accessToken: add some user data to it, like id and roles
+    const signJwtTokenDto = { username: user.username, userId: user.id, roles: user.roles };
 
     // we don't increment tokenVersion here, only when we login, this way refreshToken is always valid until we login again
-// const refreshToken: AccessToken = await this.authService.signRefreshToken(loginUserDto, tokenVersion);
-const refreshToken: AccessToken = await this.authService.signRefreshToken(signJwtTokenDto, tokenVersion);
+    // const refreshToken: AccessToken = await this.authService.signRefreshToken(loginUserDto, tokenVersion);
+    const refreshToken: AccessToken = await this.authService.signRefreshToken(signJwtTokenDto, tokenVersion);
     // send refreshToken in response/setCookie
     this.authService.sendRefreshToken(res, refreshToken);
 
+    // everytime user refreshToken we sent a new authToken and a new refreshToken in cookies
     const { accessToken }: AccessToken = await this.authService.signJwtToken(user);
     res.send({ valid: true, accessToken });
   }
