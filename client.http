@@ -12,6 +12,7 @@
 
 // Note when we use authRefreshToken, we must assign @authToken manually
 // this is because we are using authToken from authLogIn operations
+// resuming after a refreshToken we are unauthorized with old accessToken assigned to @authToken
 
 ### authLogIn
 // @name authLogIn

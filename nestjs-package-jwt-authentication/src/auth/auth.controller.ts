@@ -54,7 +54,8 @@ export class AuthController {
     @Request() req,
     @Response() res,
   ): Promise<void> {
-    Logger.log(`user ${JSON.stringify(req.user, undefined, 2)}`, AuthController.name);
+    // always incrementVersion this way user can't use refreshToken anymore
+    // Logger.log(`user ${JSON.stringify(req.user, undefined, 2)}`, AuthController.name);
     this.userService.usersStore.incrementTokenVersion(req.user.username);
     // send empty refreshToken, with same name jid, etc, better than res.clearCookie
     // this will invalidate the browser cookie refreshToken, only work with browser, not with insomnia etc
