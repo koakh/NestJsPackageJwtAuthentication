@@ -39,10 +39,10 @@
   },
   "dependencies": {
     "@nest-middlewares/cookie-parser": "^6.0.0",
-    "@nestjs/config": "^0.5.0",
+    "@nestjs/config": "^1.1.6",
     "@nestjs/jwt": "^7.1.0",
     "@nestjs/passport": "^7.1.0",
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
     "class-validator": "^0.12.2",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
